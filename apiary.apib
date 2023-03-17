@@ -1,0 +1,601 @@
+FORMAT: 1A
+HOST: https://Shaadi-Caravan.apiary-mock.com/
+
+# Web Development Project 
+Creating MOCK APIS for Web Development Project 'Shaadi Caravan'.
+
+
+
+
+## Profile Create [/signup]
+
+### Create User Profile [POST /user]
++ Request (application/json)
+
+        {
+            "firstname": "Yunus",
+            "lastname": "Mahmood",
+            "contact_number": "03026492390",
+            "email": "xyz@gmail.com",
+            "role": "Customer", 
+            "username": "xyz",
+            "password": "abc",
+            "country": "Pakistan",
+            "city": "Karachi",
+            "language": "en"
+        }
++ Response 201 (application/json)
+
+        {
+            "account_id": 1,
+            "accessToken": "12524afadad",
+            "refreshToken": "12524afadad"
+        }
+
+### Create Vendor Profile [POST /vendor]
++ Request (application/json)
+
+        {
+            "firstName": "Hamza", 
+            "lastName": "Akbar",
+            "email": "hamza@gmail.com",
+            "password": "123456",
+            "role": "vendor",
+            "language": "en",
+            "contact_number": "123456789",
+            "businessName": "Taanda Halls", 
+            "businessType": "wedding_hall",
+            "businessAddress": "Saba Avenue",
+            "gotShopAlreadyWithUs": "false",
+            "country": "Pakistan",
+            "city": "Karachi"
+        }
++ Response 201 (application/json)
+
+        {
+            "account_id": "ABC",
+            "accessToken": "12324asadad",
+            "refreshToken": "12324asadad"
+        }
+### Create Administrator Profile [POST /admin]
++ Request (application/json)
+
+        {
+            "email": "hamza@gmail.com",
+            "password": "123456"
+        }
++ Response 201 (application/json)
+
+        {
+            "account_id": "ABC",
+            "role" : "admin"
+        }
+## Profile Update [/settings]
+
+### Update Profile [PUT]
++ Request (application/json)
+
+        {
+            "contact_number": 03036492380
+        }
+
++ Response 200 (application/json)
+    + Headers
+
+            Token:<Bearer> Token
+    + Body
+
+            {
+                "account_id": 1,
+                "username": "xyz",
+                "firstname": "Yunus",
+                "lastname": "Mahmood",
+                "contact_number": 03036492380,
+                "email": "xyz@gmail.com",
+                "message": "account information updated"
+                "ProfilePicture" : "user.png",
+            }
+## Profile Delete [/delete]
+
+### Delete Profile [DELETE]
++ Request (application/json)
+        
+        {
+            "password": "abc123"
+        }
++ Response 204
+    + Headers 
+
+            Token:<Bearer> Token
+            message: "Profile deleted successfully."
+
+## Profile Read [/profile]
+
+### Read Profile [GET /user]
++ Response 200
+
+        {
+            "user_id": 1,
+            "username": "xyz",
+            "firstname": "Yunus",
+            "lastname": "Mahmood",
+            "contact_number": 03036492380,
+            "email": "xyz@gmail.com",
+            "country": "Pakistan",
+            "city": "Karachi"
+        }
+
+## User Login [/login]
+### Login Profile [POST] 
++ Request (application/json)
+
+    + Body
+    
+            {
+                "email": "xyz@gmail.com",
+                "password": "password123"
+            }
+            
++ Response 200 (application/json)
+
+    + Headers
+
+            Token:<Bearer> Token
+    + Body
+
+            {
+                "message": "User authenticated successfully.",
+                "account_id": 1,
+                "access_token": "eyJhbGciOiJIUzI1NiIsInR5cC",
+                "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cC",
+                "role": "User"
+            }
+
+## User Logout [/logout]
+### Logout Profile [DELETE]
++ Request (application/json)
+
+        {
+            "access_token": "eyJhbGciOiJIUzI1NiIsInR5cC"
+        }
++ Response 200 (application/json)
+
+        {
+            "message": "User logged out successfully."
+        }
+
+## User Homepage  [/userhomepage]
+
+### List Wedding Data [GET]
++ Response 200 (application/json)
+
+        {
+            "wedding_planner": {
+                "date": "2023-08-25",
+                "hall": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Hall",
+                        "location": "Sample Location",
+                        "capacity": 200,
+                        "price": 100000
+                    }
+                },
+                "caterer": {
+                  "is_chosen": false,
+                  "details": null
+                },
+                "florists": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Florist",
+                        "location": "Sample Location",
+                        "services": ["Bridal Bouquets", "Corsages"],
+                        "pricing": {
+                          "bridal_bouquets": 200,
+                          "corsages": 50
+                        }
+                    }
+                }
+            }
+        }
+
+### Update Wedding Data [PUT]
++ Request (application/json)
+
+        {
+            "wedding_planner": {
+                "date": "2023-08-25",
+                "hall": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Hall",
+                        "location": "Sample Location",
+                        "capacity": 200,
+                        "price": 100000
+                    }
+                },
+                "caterer": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Caterer",
+                        "location": "Sample Location",
+                        "menu": ["Sample Menu Item 1", "Sample Menu Item 2"],
+                        "price_per_person": 850
+                    }
+                },
+                "florists": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Florist",
+                        "location": "Sample Location",
+                        "services": ["Bridal Bouquets", "Corsages"],
+                        "pricing": {
+                          "bridal_bouquets": 200,
+                          "corsages": 50
+                        }
+                    }
+                }
+            }
+        }
++ Response 200 (application/json)
+
+        {
+            "wedding_planner": {
+                "date": "2023-08-25",
+                "hall": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Hall",
+                        "location": "Sample Location",
+                        "capacity": 200,
+                        "price": 100000
+                    }
+                },
+                "caterer": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Caterer",
+                        "location": "Sample Location",
+                        "menu": ["Sample Menu Item 1", "Sample Menu Item 2"],
+                        "price_per_person": 850
+                    }
+                },
+                "florists": {
+                    "is_chosen": true,
+                    "details": {
+                        "name": "Sample Florist",
+                        "location": "Sample Location",
+                        "services": ["Bridal Bouquets", "Corsages"],
+                        "pricing": {
+                          "bridal_bouquets": 200,
+                          "corsages": 50
+                        }
+                    }
+                }
+            },
+            "message": "Wedding planner updated successfully on March 10, 2023 at 10:32 AM."
+        }
+
+### Get Appointments Data [GET /appointments]
++ Response 200 (application/json)
+
+        {   
+            "appointments":[
+                {
+                    "appointment_id": 1,
+                    "vendor_name": "Vendor 1",
+                    "service_type": "Service 2",
+                    "date": "2023-03-15",
+                    "time": "13:30",
+                    "location": "18 St, DHA"
+                },
+                {
+                    "appointment_id": 2,
+                    "vendor_name": "Vendor 2",
+                    "service_type": "Service 1",
+                    "date": "2023-03-19",
+                    "time": "16:30",
+                    "location": "Askari Building 16"
+                }
+            ]
+        }
+## User Services Page [/servicepage]
+
+### Get All Services [GET]
++ Response 200 (application/json)
+
+         {
+            "All_services": [
+                {
+                    "Box1": {
+                        "Service_id": 1,
+                        "Vendor_name": "Vendor 1",
+                        "Service_type": "Service 1",
+                        "Price": 200,
+                        "Rating": 4.5
+                    }
+                },
+                {
+                    "Box2": {
+                        "Service_id": 2,
+                        "Vendor_name": "Vendor 2",
+                        "Service_type": "Service 2",
+                        "Price": 400,
+                        "Rating": 4.8
+                    }
+                }
+            ]
+        }
+### Get Services By Filter [GET /servicepage{?rating,service_type}]
+
++ Parameters
+    + rating (number, optional) -rating was 4.5 so more than that
+    + service_type (string, optional) -No service type was given
+
++ Response 200 (application/json)
+        
+        {
+            "Filtered_services": [
+                {
+                    "Box1": {
+                        "Service_id": 2,
+                        "Vendor_name": "Vendor 2",
+                        "Service_type": "Service 2",
+                        "Price": 400,
+                        "Rating": 4.8
+                    }
+                }
+            ]
+        }
+
+## User Clicked Service Box [/servicepage/{service_id}]
+
+### Get All Service Information [GET]
++ Parameters
+    + service_id (integer, required) -The ID of the clicked service box.
+
++ Response 200 (application/json)
+
+        {
+            "Service_id": 1,
+            "Vendor_name": "Vendor 1",
+            "Service_type": "Service 2",
+            "Description": "This is a description of the service.",
+            "Pictures": [
+                "https://example.com/picture1.jpg",
+                "https://example.com/picture2.jpg",
+                "https://example.com/picture3.jpg"
+            ],
+            "Contact_number": "02345723459",
+            "Email_address": "vendor@example.com"
+        }
+
+## User Form Page [/servicepage/{service_id}/form]
+### Get Customized Form [GET]
++ Response 200 (application/json)
+
+        {
+            "Vendor_name": "Vendor 1",
+            "Service_type": "Service 2",
+            "Questions": [
+                {
+                    "Question": "Date?",
+                    "input": [
+                        {
+                            "type": "date",
+                            "required": true,
+                            "placeholder": "Enter date"
+                        }
+                    ]
+                },
+                {
+                    "Question": "Time?"
+                    "input": [
+                        "type": "time",
+                        "required": true,
+                        "placeholder": "Enter time"
+                    ]
+                },
+                {
+                    "Question": "Number of Guests?",
+                    "input": [
+                        {
+                            "type": "number",
+                            "required": true,
+                            "placeholder": "Enter number of guests"
+                        }
+                    ]
+                },
+                {
+                    "Question": "Menu Preferences?",
+                    "input": [
+                        {
+                            "type": "checkbox",
+                            "required": true,
+                            "options": [
+                                {
+                                    "label": "Vegetarian",
+                                    "value": "vegetarian"
+                                },
+                                {
+                                    "label": "Non-Vegetarian",
+                                    "value": "non-vegetarian"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+### Get Cancellation Policy [GET /Cancel]
++ Response 200 (application/json)
+
+        {
+            "message": "Penalty for cancelattion in time frame (7 days), Rs 10,000"
+        }
+        
+### Submit Form [POST]
++ Request
+
+        {
+            "Vendor_name": "Vendor 1",
+            "Service_type": "Service 2",
+            "Answers": [
+                {
+                    "Question": "Date?",
+                    "Answer": "2023-05-15"
+                },
+                {
+                    "Question": "Time?",
+                    "Answer": "19:00"
+                },
+                {
+                    "Question": "Number of guests?",
+                    "Answer": "100"
+                },
+                {
+                    "Question": "Menu preferences?",
+                    "Answer": "Vegetarian"
+                }
+            ]
+        }
+        
++ Response 201 (application/json)
+
+        {
+        }
+## User Appointment Page [/servicepage/{service_id}/appointments]
+        
+### Get Appointment Timings [GET]
+
++ Response 200 (application/json)
+
+        {
+            "Free_timings": [
+                "10:00 AM",
+                "11:00 AM",
+                "12:00 PM"
+            ],
+            "Closed_timings": [
+                "1:00 PM",
+                "2:00 PM",
+                "3:00 PM"
+            ],
+            "Date": "2023-03-15",
+            "Vendor_name": "Vendor 1"
+        }
+### Book Appointment Time [POST]
+
++ Request (application/json)
+
+        {
+            "Date": "2023-03-15",
+            "Vendor_name": "Vendor 1",
+            "Timing": "11:00 AM"
+        }
+        
++ Response 201 (application/json)
+
+        {
+            "appointment_id": 1,
+            "user_id": 1,
+            "vendor_id": 1,
+            "message": "Booking confirmed",
+            "Date": "2023-03-15",
+            "Vendor_name": "Vendor 1",
+            "Service_type": "Service 1",
+            "Timing": "11:00 AM",
+            "location": "18 St, DHA"
+        }
+        
+### Delete Appointment Time [DELETE]
+
++ Request (application/json)
+
+        {
+            "appointment_id": 1
+        }
++ Response 204
+
+
+## Vendor Homepage [/vendorhomepage]
+
+## User Creates Review [/servicepage/{service_id}/review]
+### User Creates Review [POST]
+
++ Request (application/json)
+
+        {
+            "accessToken" : "askjadhak343rerwer34534",
+            "vendorId" : "Asasjasdfusfkj2324324",
+            "vendorProfilePicture" : "vendor.png",
+            "businessName" : "Taanda Halls",
+            "userid" : "asasahdbsak23234234",
+            "userFirstName" : "Hamza",
+            "userLastName" : "Akbar",
+            "userProfilePicture" : "user.png",
+            "review" : "Bad service",
+            "rating" : "2",
+            "verifiedPurchase" : "true",
+        }
++ Response 201 (application/json)
+
+        {
+            "Review" : {
+                "userid" : "232432534rdfrda34wersdf",
+                "vendorId": "640e6d1998470a969acdcb62",
+                "vendorProfilePicture" : "vendor.png",
+                "businessName" : "Taanda Halls",
+                "userId" : "Asasadasdfsfhd3232343242",
+                "userFirstName": "Hamza",
+                "userLastName": "Akbar",
+                "userProfilePicture" : "pic.png",
+                "review" : "bad service",
+                "rating" : "2",
+                "verifiedPurchase" : "true"
+            }
+        }
+        
+## Vendor Reads review [/servicepage/{service_id}/reviews]
+### Vendor Reads review [GET]
+
++ Request (application/json)
+
+        {
+            "vendorId": "640e6d1998470a969acdcb62",
+            "accessToken" : "aasdk34rnewbfemdbfdsjf"
+        }
++ Response 200 (application/json)
+
+        {
+            "reviews" : [
+                0 : {
+                    "_id" : "232432534rdfrda34wersdf",
+                    "vendorId": "640e6d1998470a969acdcb62",
+                    "vendorProfilePicture" : "vendor.png",
+                    "businessName" : "Taanda Halls",
+                    "userId" : "Asasadasdfsfhd3232343242",
+                    "userFirstName": "Hamza",
+                    "userLastName": "Akbar",
+                    "userProfilePicture" : "pic.png",
+                    "review" : "Really bad service",
+                    "rating" : "1",
+                    "verifiedPurchase" : "true"
+                },
+                1 : {
+                    "_id" : "2332re43875yehjfsdjdsjfhgdsyfrgu43",
+                    "vendorId": "640e6d1998470a969acdcb62",
+                    "vendorProfilePicture" : "vendor.png",
+                    "businessName" : "Taanda Halls",
+                    "userId" : "jhdfjdbfjs743irebmfhds",
+                    "userFirstName": "Akbar",
+                    "userLastName": "Ali",
+                    "userProfilePicture" : "pic.png",
+                    "review" : "Really good service",
+                    "rating" : "4",
+                    "verifiedPurchase" : "true"
+                }
+            ]
+        }
